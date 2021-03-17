@@ -1,6 +1,7 @@
 import { Content } from "mdast";
 export const MAX_INDICES_IN_AN_EMBED = 10;
 export const MAX_TRUNCATE_LENGTH = 1700;
+const HINT_STYLE_REGEX = /{%.*?%}\n?/g;
 export class Color {
   private _next = 0;
   static readonly options = {
@@ -72,4 +73,7 @@ export function headingToBold(contents: Array<Content>): Array<Content> {
     }
     return acc.concat([content]);
   }, []);
+}
+export function removeHintStyle(content: string): string {
+  return content.replace(HINT_STYLE_REGEX, '');
 }

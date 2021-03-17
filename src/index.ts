@@ -16,6 +16,7 @@ import {
   last,
   capitalize,
   headingToBold,
+  removeHintStyle
 } from "./util";
 
 async function run() {
@@ -61,7 +62,7 @@ async function run() {
         title,
         readUrl,
         description: [
-          truncate(markdown.content, MAX_TRUNCATE_LENGTH, "..."),
+          truncate(removeHintStyle(markdown.content), MAX_TRUNCATE_LENGTH, "..."),
           `📰 [Read more](${readUrl})`,
         ].join("\n\n"),
       } as const;
