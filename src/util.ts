@@ -75,5 +75,10 @@ export function headingToBold(contents: Array<Content>): Array<Content> {
   }, []);
 }
 export function removeHintStyle(content: string): string {
-  return content.replace(HINT_STYLE_REGEX, '');
+  console.log(`BEFORE: ${content}`);
+  console.log(`BEFORE LENGTH: ${content.length}`);
+  content = content.replace(HINT_STYLE_REGEX, "");
+  console.log(`AFTER: ${content}`);
+  console.log(`AFTER LENGTH: ${content.length}`);
+  return content;
 }

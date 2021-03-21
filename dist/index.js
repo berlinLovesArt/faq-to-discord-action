@@ -49608,7 +49608,7 @@ function run() {
                 title,
                 readUrl,
                 description: [
-                    util_1.truncate(markdown.content, util_1.MAX_TRUNCATE_LENGTH, "..."),
+                    util_1.truncate(util_1.removeHintStyle(markdown.content), util_1.MAX_TRUNCATE_LENGTH, "..."),
                     `📰 [Read more](${readUrl})`,
                 ].join("\n\n"),
             };
@@ -49726,9 +49726,10 @@ run().catch((err) => {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.headingToBold = exports.capitalize = exports.last = exports.countMessagesRequired = exports.truncate = exports.Color = exports.MAX_TRUNCATE_LENGTH = exports.MAX_INDICES_IN_AN_EMBED = void 0;
+exports.removeHintStyle = exports.headingToBold = exports.capitalize = exports.last = exports.countMessagesRequired = exports.truncate = exports.Color = exports.MAX_TRUNCATE_LENGTH = exports.MAX_INDICES_IN_AN_EMBED = void 0;
 exports.MAX_INDICES_IN_AN_EMBED = 10;
 exports.MAX_TRUNCATE_LENGTH = 1700;
+const HINT_STYLE_REGEX = /{%.*?%}\n?/g;
 class Color {
     constructor() {
         this._next = 0;
@@ -49801,6 +49802,15 @@ function headingToBold(contents) {
     }, []);
 }
 exports.headingToBold = headingToBold;
+function removeHintStyle(content) {
+    console.log(`BEFORE: ${content}`);
+    console.log(`BEFORE LENGTH: ${content.length}`);
+    content = content.replace(HINT_STYLE_REGEX, "");
+    console.log(`AFTER: ${content}`);
+    console.log(`AFTER LENGTH: ${content.length}`);
+    return content;
+}
+exports.removeHintStyle = removeHintStyle;
 
 
 /***/ }),
